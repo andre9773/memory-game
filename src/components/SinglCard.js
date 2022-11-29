@@ -1,16 +1,16 @@
 import React from 'react'
 import "../components/SinglCard.css"
 
-export default function SinglCard({src}) {
+export default function SinglCard({card, handleChosed}) {
 
 const handelClick = () => {
-    
+    handleChosed(card)
 }
 
   return (
     <div className='card' >
             <div>
-              <img className='front' src={src} alt="card front"/>
+              <img className='front' src={card.src} alt="card front"/>
               <img 
                 className='back' 
                 src="/img/cover.png" 
