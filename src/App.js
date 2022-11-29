@@ -36,16 +36,19 @@ useEffect(() =>{
           }
         })
       })
-      setChoiseTwo(null)
-      setChoiseOne(null)
+      reset()
     }else{
+     setTimeout(() => reset(), 1000)
       
-      setChoiseTwo(null)
-      setChoiseOne(null)
     }
   }
 }, [choiceOne, choiceTwo])
 
+
+const reset = () =>{
+  setChoiseTwo(null)
+  setChoiseOne(null)
+}
   // shuffle cards
 const shuffleCards = () =>{
   const shuffledCards = [...cardImages, ...cardImages]
@@ -67,6 +70,7 @@ const shuffleCards = () =>{
           card={card} 
           handleChosed={handleChosed}
           key={card.id}
+          flipped={card === choiceOne || card === choiceTwo || card.march}
           />
         ))}
       </div>
