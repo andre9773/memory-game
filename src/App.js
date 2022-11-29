@@ -15,7 +15,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [choiceOne, setChoiseOne] = useState(null)
   const [choiceTwo, setChoiseTwo] = useState(null)
-
+  const [disabled, setDisabled] = useState(false)
 
 
   const handleChosed = (card) => {
@@ -26,6 +26,7 @@ function App() {
 
 useEffect(() =>{
   if (choiceOne && choiceTwo){
+    setDisabled(true)
     if(choiceOne.src === choiceTwo.src){
       setCards(prevCards => {
         return prevCards.map(card => {
@@ -48,17 +49,21 @@ useEffect(() =>{
 const reset = () =>{
   setChoiseTwo(null)
   setChoiseOne(null)
+  setDisabled(false)
 }
   // shuffle cards
 const shuffleCards = () =>{
   const shuffledCards = [...cardImages, ...cardImages]
   .sort(() => Math.random() - 0.5)
   .map((card) => ({...card, id: Math.random()}))
-
+  reset();
   setCards(shuffledCards)
 }
 
 
+useEffect(() => {
+  shuffleCards()
+}, [])
   return (
     <div className="App">
       <h1>Memory Game </h1>
@@ -71,6 +76,7 @@ const shuffleCards = () =>{
           handleChosed={handleChosed}
           key={card.id}
           flipped={card === choiceOne || card === choiceTwo || card.march}
+          disabled={disabled}
           />
         ))}
       </div>

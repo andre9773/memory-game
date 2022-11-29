@@ -1,10 +1,10 @@
 import React from 'react'
 import "../components/SinglCard.css"
 
-export default function SinglCard({card, handleChosed, flipped}) {
+export default function SinglCard({card, handleChosed, flipped, disabled}) {
 
 const handelClick = () => {
-    handleChosed(card)
+  if(!disabled) handleChosed(card)
 }
 
   return (
